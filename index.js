@@ -110,6 +110,7 @@ app.post("/api/persons", (request, response) => {
 	response.status(201).json(nueva_persona)
 })
 
+
 //Funcion que genera un ID Aleatorio
 const randomID = () => {
     //Math.floor retorna solo numeros enteros que se generen con Math.random()
