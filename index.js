@@ -47,6 +47,21 @@ app.get("/info", (request, response) => {
     `)
 })
 
+//Obtener solo una persona por id
+app.get("/api/persons/:id", (request, response) => {
+	
+    const id_persona = parseInt(request.params.id)
+	
+	const persona = persons.find(persona => persona.id === id_persona)
+	
+	if (persona) {
+		response.json(persona)
+	} else {
+        
+		response.status(404).end()
+	}
+})
+
 //Ejecucion del servidor
 const PORT = 3001
 app.listen(PORT, () => {
