@@ -83,7 +83,22 @@ app.post("/api/persons", (request, response) => {
 	const body = request.body
     console.log(body)
 	
-   
+    //Validacion si no se envian los datos completos
+	if (!body.name || !body.number) {
+		console.log("Error! Faltan datos")
+		return response.status(400).json({
+			error: "Datos Incompletos"
+		})
+	}
+	
+    //Validacion si ya existe el dato
+	const existe = persons.find(person => person.name === body.name)
+	if (existe) {
+		return response.status(400).json({
+			error: "El nombre debe ser unico"
+		})
+	}
+
 	//Envio de Objeto con los datos recepcionados
 	const nueva_persona = {
         id: persons.length+1,
