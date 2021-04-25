@@ -3,7 +3,6 @@ const app = express()
 
 app.use(express.json())
 
-
 let persons = [
     { 
         "id": 1,
@@ -27,6 +26,7 @@ let persons = [
         "number": "39-23-6423122"
     }
 ]
+
 
 //Obtener todos los datos
 app.get("/api/persons", (request, response) => {
@@ -76,6 +76,23 @@ app.delete("/api/persons/:id", (request, response) => {
         persons.splice(index-1,1);
         console.log(eliminado)
         response.send(eliminado);
+})
+
+//Metodo Post, crear un nuevo recurso
+app.post("/api/persons", (request, response) => {
+	const body = request.body
+    console.log(body)
+	
+   
+	//Envio de Objeto con los datos recepcionados
+	const nueva_persona = {
+        id: persons.length+1,
+		name: body.name,
+		number: body.number
+	}
+	//Concat metodo que agrega un objeto al array
+	persons = persons.concat(nueva_persona)
+	response.status(201).json(nueva_persona)
 })
 
 //Ejecucion del servidor
