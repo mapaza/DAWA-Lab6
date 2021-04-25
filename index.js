@@ -28,11 +28,26 @@ let persons = [
     }
 ]
 
+//Obtener todos los datos
 app.get("/api/persons", (request, response) => {
     console.log(request.body)
 	response.json(persons)
 })
 
+//Obtener la información de la Agenda
+app.get("/info", (request, response) => {
+	
+    const fecha = new Date()
+	
+	response.send(`
+    <div style="margin:50px; padding: 20px; background-color: #8ED6FB; font-family:monospace" >
+        <h1 style="color:white">Phonebook has info for ${persons.length} people </h1> 
+        <h2>${fecha}</h2>
+    </div>
+    `)
+})
+
+//Ejecucion del servidor
 const PORT = 3001
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`)
