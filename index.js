@@ -56,10 +56,26 @@ app.get("/api/persons/:id", (request, response) => {
 	
 	if (persona) {
 		response.json(persona)
-	} else {
-        
+	} else {      
 		response.status(404).end()
 	}
+})
+
+// Borrar datos de la API por id
+app.delete("/api/persons/:id", (request, response) => {
+	
+    const id_persona = parseInt(request.params.id)
+
+	const eliminado = persons.filter(persona => persona.id === id_persona)
+	
+    if(!eliminado){
+        response.status(404).json(persons)
+    }
+		const index = persons.indexOf(eliminado);
+        //metodo Splice elimina un elemento del array object
+        persons.splice(index-1,1);
+        console.log(eliminado)
+        response.send(eliminado);
 })
 
 //Ejecucion del servidor
