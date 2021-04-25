@@ -101,7 +101,7 @@ app.post("/api/persons", (request, response) => {
 
 	//Envio de Objeto con los datos recepcionados
 	const nueva_persona = {
-        id: persons.length+1,
+        id: randomID(),
 		name: body.name,
 		number: body.number
 	}
@@ -109,6 +109,13 @@ app.post("/api/persons", (request, response) => {
 	persons = persons.concat(nueva_persona)
 	response.status(201).json(nueva_persona)
 })
+
+//Funcion que genera un ID Aleatorio
+const randomID = () => {
+    //Math.floor retorna solo numeros enteros que se generen con Math.random()
+	const nuevo_id = Math.floor(Math.random() * 100000000)
+	return nuevo_id
+}
 
 //Ejecucion del servidor
 const PORT = 3001
